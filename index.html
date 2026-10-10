@@ -102,22 +102,49 @@
                 transition: none;
             }
         }
+
+        @media (max-width: 360px) {
+            header .brand-link {
+                gap: 4px;
+            }
+
+            header .brand-link > div:first-child {
+                width: 40px;
+                height: 40px;
+            }
+
+            header .brand-link span.text-lg {
+                font-size: 15px;
+                letter-spacing: 0;
+            }
+
+            header button[onclick="openBookingModal()"] {
+                gap: 4px;
+                padding: 8px;
+                font-size: 11px;
+            }
+
+            header button[onclick="openBookingModal()"] i {
+                width: 12px;
+                height: 12px;
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-brand-green selection:text-black">
 
     <!-- Top Navigation Header -->
     <header class="fixed top-0 left-0 right-0 z-50 bg-[#0a0e12]/90 backdrop-blur-md border-b border-gray-800/60 transition-all duration-300">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between">
             
             <!-- Brand Logo & Tagline -->
-            <a href="#" class="brand-link flex items-center gap-3 group">
-                <div class="w-16 h-16 shrink-0 overflow-hidden">
+            <a href="#" class="brand-link flex items-center gap-2 sm:gap-3 group">
+                <div class="w-12 h-12 sm:w-16 sm:h-16 shrink-0 overflow-hidden">
                     <img src="img/logo_sin_fondo.png" alt="" class="brand-mark w-full h-full filter drop-shadow-[0_0_8px_rgba(0,230,118,0.3)]">
                 </div>
                 <div>
                     <div class="flex items-center gap-1.5">
-                        <span class="text-2xl font-black tracking-wider text-white">VEXTRO<span class="text-brand-green">SOFT</span></span>
+                        <span class="text-lg sm:text-2xl font-black tracking-wider text-white">VEXTRO<span class="text-brand-green">SOFT</span></span>
                     </div>
                     <span class="text-[10px] text-gray-400 font-medium tracking-tight block -mt-1 hidden sm:block">
                         <span class="inline-block w-2 h-2 rounded-full bg-brand-green mr-1 animate-pulse"></span> Soluciones tecnológicas avanzadas
@@ -142,9 +169,9 @@
                     WhatsApp
                 </a>
                 
-                <button onclick="openBookingModal()" class="bg-brand-green hover:bg-brand-greenHover text-black px-5 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 btn-glow-green transition-all transform hover:-translate-y-0.5">
+                <button onclick="openBookingModal()" class="bg-brand-green hover:bg-brand-greenHover text-black px-3 py-2 sm:px-5 sm:py-2.5 rounded-lg font-bold text-xs sm:text-sm flex items-center gap-1.5 sm:gap-2 whitespace-nowrap shrink-0 btn-glow-green transition-all transform hover:-translate-y-0.5">
                     <span>Agendar Cita</span>
-                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    <i data-lucide="arrow-right" class="w-4 h-4 shrink-0"></i>
                 </button>
             </div>
         </div>
