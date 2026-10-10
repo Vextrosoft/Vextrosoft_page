@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VextroSoft | Desarrollo de Software & Automatizaciones en Colombia</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- favicon Icons -->
+     <link rel="shortcut icon" href="./img/logo_2.png" type="image/x-icon">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            dark: '#0a0e12',
+                            card: '#12181f',
+                            border: '#1f2937',
+                            green: '#00e676',
+                            greenHover: '#00c853',
+                            red: '#ff2a4b',
+                            redHover: '#d50000',
+                            accent: '#10b981'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0a0e12;
+            color: #f3f4f6;
+            overflow-x: hidden;
+        }
+
+        .text-gradient-green {
+            background: linear-gradient(135deg, #00e676 0%, #10b981 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .text-gradient-red {
+            background: linear-gradient(135deg, #ff2a4b 0%, #ff5252 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+            background: rgba(18, 24, 31, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .glass-card:hover {
+            border-color: rgba(0, 230, 118, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(0, 230, 118, 0.15);
+        }
+
+        .btn-glow-green {
+            box-shadow: 0 0 20px rgba(0, 230, 118, 0.25);
+        }
+
+        .btn-glow-green:hover {
+            box-shadow: 0 0 30px rgba(0, 230, 118, 0.45);
+        }
+
+        /* Pulse Animation for Floating WhatsApp */
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.8; }
+            50% { transform: scale(1.1); opacity: 0.4; }
+            100% { transform: scale(0.95); opacity: 0.8; }
+        }
+        .pulse-whatsapp {
+            animation: pulse-ring 2s infinite ease-in-out;
+        }
+
+        .brand-mark {
+            object-fit: cover;
+            transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+        }
+
+        .brand-link:hover .brand-mark,
+        .brand-link:focus-visible .brand-mark {
+            transform: translateY(-3px) rotate(-6deg) scale(1.08);
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .brand-mark {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-brand-green selection:text-black">
+
+    <!-- Top Navigation Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-[#0a0e12]/90 backdrop-blur-md border-b border-gray-800/60 transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            
+            <!-- Brand Logo & Tagline -->
+            <a href="#" class="brand-link flex items-center gap-3 group">
+                <div class="w-16 h-16 shrink-0 overflow-hidden">
+                    <img src="img/logo_sin_fondo.png" alt="" class="brand-mark w-full h-full filter drop-shadow-[0_0_8px_rgba(0,230,118,0.3)]">
+                </div>
+                <div>
+                    <div class="flex items-center gap-1.5">
+                        <span class="text-2xl font-black tracking-wider text-white">VEXTRO<span class="text-brand-green">SOFT</span></span>
+                    </div>
+                    <span class="text-[10px] text-gray-400 font-medium tracking-tight block -mt-1 hidden sm:block">
+                        <span class="inline-block w-2 h-2 rounded-full bg-brand-green mr-1 animate-pulse"></span> Soluciones tecnológicas avanzadas
+                    </span>
+                </div>
+            </a>
+
+            <!-- Nav Links (Desktop) -->
+            <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-gray-300">
+                <a href="#servicios" class="hover:text-brand-green transition-colors">Servicios</a>
+                <a href="#automatizacion" class="hover:text-brand-green transition-colors">Automatización</a>
+                <a href="#proceso" class="hover:text-brand-green transition-colors">Cómo Trabajamos</a>
+                <a href="#contacto" class="hover:text-brand-green transition-colors">Contacto</a>
+            </nav>
+
+            <!-- Action Buttons Header -->
+            <div class="flex items-center gap-3">
+                <a href="https://wa.me/573227375425?text=Hola%20VextroSoft,%20quiero%20m%C3%A1s%20informaci%C3%B3n%20sobre%20sus%20servicios" 
+                   target="_blank" 
+                   class="hidden sm:flex items-center gap-2 px-4 py-2.5 rounded-lg border border-gray-700 bg-gray-900/80 hover:bg-gray-800 text-gray-200 text-sm font-semibold transition-all">
+                    <i data-lucide="message-square" class="w-4 h-4 text-brand-green"></i>
+                    WhatsApp
+                </a>
+                
+                <button onclick="openBookingModal()" class="bg-brand-green hover:bg-brand-greenHover text-black px-5 py-2.5 rounded-lg font-bold text-sm flex items-center gap-2 btn-glow-green transition-all transform hover:-translate-y-0.5">
+                    <span>Agendar Cita</span>
+                    <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden border-b border-gray-800/40">
+        <!-- Background Ambient Glows -->
+        <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[300px] bg-brand-green/10 blur-[140px] pointer-events-none rounded-full"></div>
+        <div class="absolute top-1/3 left-1/4 w-[350px] h-[250px] bg-brand-red/10 blur-[120px] pointer-events-none rounded-full"></div>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="max-w-4xl">
+                
+                <!-- Micro Tagline Badge -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-md bg-gray-900/90 border border-brand-green/30 text-xs font-bold tracking-wider text-brand-green uppercase mb-8">
+                    <span class="w-2 h-2 rounded-sm bg-brand-green"></span>
+                    TU SOFTWARE NO ES UN GASTO: ES TU MEJOR MOTOR DE CRECIMIENTO
+                </div>
+
+                <!-- Main Headline -->
+                <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold text-white tracking-tight leading-[1.1] mb-8">
+                    Desarrollo de software y automatizaciones <span class="text-brand-green underline decoration-brand-green/40 decoration-wavy decoration-2">para empresas.</span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-lg sm:text-xl text-gray-300 leading-relaxed font-normal mb-10 max-w-3xl">
+                    Desarrollo de software a medida, automatización de procesos e integración de sistemas para empresas en Bogotá y toda Colombia. Plataformas rápidas, escalables y construidas para optimizar tu operación y multiplicar tus ventas.
+                </p>
+
+                <!-- CTA Buttons Box -->
+                <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-8">
+                    <!-- Primary CTA -->
+                    <button onclick="openBookingModal()" class="bg-brand-green hover:bg-brand-greenHover text-black px-8 py-4 rounded-xl font-extrabold text-base flex items-center justify-center gap-3 btn-glow-green transition-all transform hover:-translate-y-1">
+                        <span>Agenda tu llamada gratis</span>
+                        <div class="w-7 h-7 bg-black/10 rounded-lg flex items-center justify-center">
+                            <i data-lucide="arrow-right" class="w-5 h-5 text-black"></i>
+                        </div>
+                    </button>
+
+                    <!-- Secondary WhatsApp CTA -->
+                    <a href="https://wa.me/573227375425?text=Hola%20VextroSoft,%20quiero%20agendar%20una%20reuni%C3%B3n" 
+                       target="_blank"
+                       class="px-8 py-4 rounded-xl font-bold text-base text-white border border-gray-700 bg-gray-900/80 hover:bg-gray-800 hover:border-gray-600 flex items-center justify-center gap-3 transition-all">
+                        <i data-lucide="message-circle" class="w-5 h-5 text-brand-green"></i>
+                        <span>Escríbenos por WhatsApp</span>
+                    </a>
+                </div>
+
+                <!-- Micro Copy Note -->
+                <div class="flex items-center gap-2 text-sm text-gray-400 font-medium">
+                    <i data-lucide="check-circle-2" class="w-4 h-4 text-brand-green flex-shrink-0"></i>
+                    <span>Diagnóstico de 30 min · Sin costo · Te decimos qué optimizar aunque no trabajes con nosotros.</span>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats & Metrics Banner -->
+    <section class="py-12 bg-[#0c1116] border-b border-gray-800/50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div class="p-4">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">100%</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium uppercase tracking-wider">Código a Medida</div>
+                </div>
+                <div class="p-4 border-l border-gray-800">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-brand-green mb-1">+70%</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium uppercase tracking-wider">Ahorro en Tiempos Operativos</div>
+                </div>
+                <div class="p-4 border-l border-gray-800">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-white mb-1">24/7</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium uppercase tracking-wider">Sistemas Automatizados</div>
+                </div>
+                <div class="p-4 border-l border-gray-800">
+                    <div class="text-3xl sm:text-4xl font-extrabold text-brand-red mb-1">Top Tier</div>
+                    <div class="text-xs sm:text-sm text-gray-400 font-medium uppercase tracking-wider">Arquitectura Cloud & IA</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicios" class="py-24 relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-brand-green mb-3">Nuestras Soluciones Especializadas</h2>
+                <p class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
+                    Ingeniería de software diseñada para escalar tu negocio
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                
+                <!-- Service Card 1 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-green/10 border border-brand-green/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="cpu" class="w-7 h-7 text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Automatización de Procesos</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Eliminamos tareas repetitivas mediante bots, flujos automáticos de trabajo e integración de API empresariales para multiplicar la productividad.
+                    </p>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green"></i> Integración CRM y ERP</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green"></i> Notificaciones e Informes Automáticos</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 2 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 group border-brand-green/30">
+                    <div class="w-14 h-14 rounded-xl bg-brand-green/10 border border-brand-green/40 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="code-2" class="w-7 h-7 text-brand-green"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Software Empresarial a Medida</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Desarrollo full-stack de plataformas web, portales de clientes y aplicaciones internas construidas a la medida de tu modelo operativo.
+                    </p>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green"></i> Arquitectura Limpia y Escalable</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green"></i> Alta Velocidad y Seguridad</li>
+                    </ul>
+                </div>
+
+                <!-- Service Card 3 -->
+                <div class="glass-card p-8 rounded-2xl transition-all duration-300 group">
+                    <div class="w-14 h-14 rounded-xl bg-brand-red/10 border border-brand-red/30 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                        <i data-lucide="git-merge" class="w-7 h-7 text-brand-red"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3">Integración de Sistemas & IA</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed mb-6">
+                        Conectamos software discontinuo y potenciamos tu empresa mediante asistentes inteligentes, modelos de lenguaje y visión artificial.
+                    </p>
+                    <ul class="space-y-2 text-xs text-gray-300">
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green"></i> Conexión de API REST & Webhooks</li>
+                        <li class="flex items-center gap-2"><i data-lucide="check" class="w-3.5 h-3.5 text-brand-green"></i> Asistentes de IA de Atención</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Automation Showcase Section -->
+    <section id="automatizacion" class="py-20 bg-[#0c1116] border-y border-gray-800/60">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <span class="text-brand-red text-xs font-bold uppercase tracking-widest block mb-2">Casos de Uso Operativo</span>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white mb-6 leading-tight">
+                        Transformamos procesos manuales en sistemas autónomos de alto rendimiento.
+                    </h2>
+                    <p class="text-gray-300 leading-relaxed mb-8">
+                        En VextroSoft auditamos el día a día de tu empresa para identificar cuellos de botella y reemplazarlos por automatizaciones eficientes que reducen errores humanos a cero.
+                    </p>
+
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-900/60 border border-gray-800">
+                            <div class="p-2 rounded-lg bg-brand-green/20 text-brand-green mt-1">
+                                <i data-lucide="zap" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Automatización de Facturación & Ventas</h4>
+                                <p class="text-xs text-gray-400 mt-1">Sincronización instantánea entre tu pasarela de pagos, inventario y software contable.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-4 p-4 rounded-xl bg-gray-900/60 border border-gray-800">
+                            <div class="p-2 rounded-lg bg-brand-red/20 text-brand-red mt-1">
+                                <i data-lucide="bot" class="w-5 h-5"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-white text-base">Bots de Atencion & Captación de Leads</h4>
+                                <p class="text-xs text-gray-400 mt-1">Respuestas instantáneas en WhatsApp con cualificación automática de clientes potenciales.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Interactive Preview Graphic -->
+                <div class="glass-card p-6 rounded-2xl relative overflow-hidden border border-gray-700/60 shadow-2xl">
+                    <div class="flex items-center justify-between pb-4 mb-6 border-b border-gray-800">
+                        <div class="flex items-center gap-2">
+                            <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                            <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                            <span class="text-xs font-mono text-gray-400 ml-2">vextrosoft-automation-engine.v2</span>
+                        </div>
+                        <span class="text-xs font-semibold px-2.5 py-1 rounded bg-brand-green/20 text-brand-green">EJECUTANDO</span>
+                    </div>
+
+                    <div class="space-y-3 font-mono text-xs">
+                        <div class="p-3 rounded bg-black/60 border border-gray-800 flex items-center justify-between text-gray-300">
+                            <span class="text-brand-green">✔ [08:00 AM] Evento recibido: Nuevo Lead de Formulario</span>
+                            <span class="text-gray-500">0.02s</span>
+                        </div>
+                        <div class="p-3 rounded bg-black/60 border border-gray-800 flex items-center justify-between text-gray-300">
+                            <span class="text-brand-green">✔ [08:01 AM] Validación de Datos & Score de Inteligencia</span>
+                            <span class="text-gray-500">0.14s</span>
+                        </div>
+                        <div class="p-3 rounded bg-black/60 border border-gray-800 flex items-center justify-between text-gray-300">
+                            <span class="text-brand-green">✔ [08:01 AM] Notificación enviada a WhatsApp Ejecutivo</span>
+                            <span class="text-gray-500">0.05s</span>
+                        </div>
+                        <div class="p-3 rounded bg-brand-green/10 border border-brand-green/40 flex items-center justify-between text-brand-green font-bold">
+                            <span>🚀 Proceso completado sin intervención humana</span>
+                            <span>100% Eficiente</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md hidden transition-opacity duration-300">
+        <div class="glass-card w-full max-w-2xl rounded-2xl border border-gray-700 bg-[#0f151c] p-6 sm:p-8 relative shadow-2xl max-h-[90vh] overflow-y-auto">
+            
+            <!-- Close Button -->
+            <button onclick="closeBookingModal()" class="absolute top-5 right-5 text-gray-400 hover:text-white p-2 rounded-lg hover:bg-gray-800">
+                <i data-lucide="x" class="w-6 h-6"></i>
+            </button>
+
+            <div class="mb-6">
+                <span class="text-xs font-bold text-brand-green uppercase tracking-wider block mb-1">Diagnóstico sin costo</span>
+                <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Agenda tu llamada de 30 minutos</h3>
+                <p class="text-sm text-gray-400 mt-1">Analizaremos tus procesos e identificaremos las mejores oportunidades de automatización.</p>
+            </div>
+
+            <!-- Booking Form -->
+            <form id="appointmentForm" onsubmit="handleFormSubmit(event)" class="space-y-4">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Nombre Completo *</label>
+                        <input type="text" required placeholder="Ej: Carlos Mendoza" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-green">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Teléfono / WhatsApp *</label>
+                        <input type="tel" id="userPhone" required placeholder="+57 300 000 0000" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-green">
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Correo Electrónico *</label>
+                    <input type="email" required placeholder="carlos@tuempresa.com" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-green">
+                </div>
+
+                <div>
+                    <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Servicio de Interés Principal</label>
+                    <select id="serviceType" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-green">
+                        <option value="Automatizaciones">Automatización de Procesos</option>
+                        <option value="Software a Medida">Desarrollo de Software a Medida</option>
+                        <option value="Integracion e IA">Integración de Sistemas e Inteligencia Artificial</option>
+                        <option value="Consultoria">Consultoría & Diagnóstico General</option>
+                    </select>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Fecha Preferida *</label>
+                        <input type="date" required id="bookingDate" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-green">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-gray-300 uppercase mb-1">Hora Preferida *</label>
+                        <select id="bookingTime" class="w-full bg-gray-900 border border-gray-700 rounded-lg px-4 py-3 text-white text-sm focus:outline-none focus:border-brand-green">
+                            <option value="09:00 AM">09:00 AM</option>
+                            <option value="11:00 AM">11:00 AM</option>
+                            <option value="02:00 PM">02:00 PM</option>
+                            <option value="04:00 PM">04:00 PM</option>
+                        </select>
+                    </div>
+                </div>
+
+                <button type="submit" class="w-full bg-brand-green hover:bg-brand-greenHover text-black font-extrabold py-4 rounded-xl text-base btn-glow-green transition-all mt-4 flex items-center justify-center gap-2">
+                    <i data-lucide="calendar-check" class="w-5 h-5"></i>
+                    <span>Confirmar y Enviar Cita</span>
+                </button>
+            </form>
+
+            <!-- Success Confirmation State (Hidden initially) -->
+            <div id="bookingSuccess" class="hidden text-center py-8">
+                <div class="w-16 h-16 bg-brand-green/20 text-brand-green rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i data-lucide="check-circle" class="w-10 h-10"></i>
+                </div>
+                <h4 class="text-2xl font-bold text-white mb-2">¡Solicitud de Cita Recibida!</h4>
+                <p class="text-gray-300 text-sm max-w-md mx-auto mb-6">Nos pondremos en contacto contigo vía WhatsApp o Correo para confirmar la reunión.</p>
+                <button onclick="closeBookingModal()" class="bg-gray-800 hover:bg-gray-700 text-white px-6 py-2.5 rounded-lg text-sm font-semibold">
+                    Cerrar Ventana
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Floating WhatsApp Button -->
+    <div class="fixed bottom-6 right-6 z-40 flex items-center gap-3">
+        <a href="https://wa.me/573227375425?text=Hola%20VextroSoft,%20quisiera%20m%C3%A1s%20informaci%C3%B3n" 
+           target="_blank" 
+           rel="noopener noreferrer"
+           aria-label="Escríbenos por WhatsApp"
+           class="relative group w-16 h-16 bg-[#25D366] hover:bg-[#20ba5a] text-white rounded-full shadow-2xl flex items-center justify-center transition-all transform hover:scale-110">
+            <span class="absolute -top-1 -right-1 w-4 h-4 bg-brand-red rounded-full border-2 border-black"></span>
+            <span class="absolute inset-0 rounded-full bg-[#25D366] opacity-75 pulse-whatsapp -z-10"></span>
+            <svg aria-hidden="true" viewBox="0 0 32 32" class="w-9 h-9 fill-none stroke-current" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M27 15.5a11 11 0 0 1-16.3 9.6L5 27l1.9-5.4A11 11 0 1 1 27 15.5Z"></path>
+                <path d="M11.3 10.8c.4-.8.8-.8 1.2-.8h.7c.3 0 .6.1.8.6l1.1 2.5c.2.4.1.7-.1 1l-.8 1c-.2.2-.2.5 0 .8.7 1.1 1.7 2.1 2.9 2.8.3.2.6.2.8-.1l1-1.2c.2-.3.6-.4.9-.2l2.3 1.1c.4.2.6.4.6.7 0 .4-.2 1.7-1.2 2.4-.8.6-1.8.9-3 .6-1.1-.3-2.5-.8-4.3-2.3-2.2-1.8-3.6-4.1-4-5.5-.4-1.4 0-2.7.6-3.4Z"></path>
+            </svg>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer id="contacto" class="bg-[#070a0d] border-t border-gray-800/80 pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
+                
+                <div class="md:col-span-2">
+                    <div class="brand-link flex items-center gap-3 mb-4 group">
+                        <div class="w-16 h-16 shrink-0 overflow-hidden">
+                            <img src="img/logo_sin_fondo.png" alt="" class="brand-mark w-full h-full filter drop-shadow-[0_0_8px_rgba(0,230,118,0.3)]">
+                        </div>
+                        <span class="text-2xl font-black text-white">VEXTRO<span class="text-brand-green">SOFT</span></span>
+                    </div>
+                    <p class="text-gray-400 text-sm max-w-md mb-6 leading-relaxed">
+                        Soluciones tecnológicas avanzadas, automatización inteligente de procesos e ingeniería de software a medida para empresas en Colombia y el mundo.
+                    </p>
+                    <div class="text-xs text-gray-500 space-y-1">
+                        <p>📍 Área de Servicio: Bogotá & Toda Colombia</p>
+                        <p>📞 Teléfono: +57 322 7375425</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold uppercase text-white tracking-wider mb-4">Servicios</h4>
+                    <ul class="space-y-2 text-sm text-gray-400">
+                        <li><a href="#servicios" class="hover:text-brand-green">Automatización</a></li>
+                        <li><a href="#servicios" class="hover:text-brand-green">Software a Medida</a></li>
+                        <li><a href="#servicios" class="hover:text-brand-green">Integración de IA</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="text-sm font-bold uppercase text-white tracking-wider mb-4">Contacto Directo</h4>
+                    <a href="https://wa.me/573227375425" target="_blank" class="inline-flex items-center gap-2 px-4 py-2 bg-brand-green/10 text-brand-green border border-brand-green/30 rounded-lg text-sm font-bold hover:bg-brand-green/20 transition-all">
+                        <i data-lucide="phone" class="w-4 h-4"></i> +57 322 7375425
+                    </a>
+                </div>
+
+            </div>
+
+            <div class="border-t border-gray-800/60 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-gray-500 gap-4">
+                <p>© 2026 VextroSoft. Todos los derechos reservados.</p>
+                <div class="flex gap-6">
+                    <a href="#" class="hover:text-gray-400">Términos de Servicio</a>
+                    <a href="#" class="hover:text-gray-400">Privacidad</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Set default minimum date for booking calendar to today
+        document.addEventListener('DOMContentLoaded', () => {
+            const dateInput = document.getElementById('bookingDate');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+                dateInput.value = today;
+            }
+        });
+
+        // Booking Modal Toggle Functions
+        function openBookingModal() {
+            const modal = document.getElementById('bookingModal');
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBookingModal() {
+            const modal = document.getElementById('bookingModal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = 'auto';
+            
+            // Reset state
+            setTimeout(() => {
+                document.getElementById('appointmentForm').classList.remove('hidden');
+                document.getElementById('bookingSuccess').classList.add('hidden');
+            }, 300);
+        }
+
+        // Form Submit Handler (Redirects to WhatsApp with prefilled message)
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            
+            const phone = document.getElementById('userPhone').value;
+            const service = document.getElementById('serviceType').value;
+            const date = document.getElementById('bookingDate').value;
+            const time = document.getElementById('bookingTime').value;
+
+            // Show UI success state inside modal
+            document.getElementById('appointmentForm').classList.add('hidden');
+            document.getElementById('bookingSuccess').classList.remove('hidden');
+
+            // Construct WhatsApp Message URL
+            const text = `Hola VextroSoft,%20quisiera%20confirmar%20mi%20cita%20para%20${service}%20el%20d%C3%ADa%20${date}%20a%20las%20${time}.%20Mi%20tel%C3%A9fono:%20${phone}`;
+            
+            // Open WhatsApp in a new tab after brief delay
+            setTimeout(() => {
+                window.open(`https://wa.me/573227375425?text=${text}`, '_blank');
+            }, 1200);
+        }
+    </script>
+</body>
+</html>
